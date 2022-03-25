@@ -22,4 +22,11 @@
         android:name="com.example.minerva.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.example.minerva.ui.setting.FragmentSetting"
+        android:label="@string/settings"
+        tools:layout="@layout/fragment_setting" />
+
 </navigation>

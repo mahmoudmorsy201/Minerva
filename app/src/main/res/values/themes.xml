@@ -13,7 +13,37 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
     <style name="DescriptionTextView" parent="Theme.AppCompat">
 
     </style>
+
+    <style name="AppTheme.loginSignUp_textInputTextLayout" parent="Widget.Design.TextInputLayout">
+        <item name="android:textSize">20sp</item>
+        <item name="android:minHeight">52dp</item>
+
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:layout_marginEnd">20dp</item>
+        <item name="android:layout_marginTop">24dp</item>
+
+        <item name="android:paddingStart">4dp</item>
+        <item name="android:paddingEnd">4dp</item>
+
+        <item name="android:textColor">@color/login_register_text_color</item>
+        <item name="android:textColorHint">@color/login_register_hint_color</item>
+        <item name="android:focusableInTouchMode">true</item>
+    </style>
+
+    <style name="AppTheme.loginSignUp_textInputEditText" parent="Widget.Design.TextInputLayout">
+
+        <item name="android:textSize">14sp</item>
+        <item name="android:minHeight">52dp</item>
+
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
 </resources>

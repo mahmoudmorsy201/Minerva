@@ -11,12 +11,12 @@ interface UserDao {
     suspend fun insertUser(user: User)
 
     @Update
-    suspend fun updateUserData(user: User)
+    suspend fun updateUserData(newUser: User)
 
     @Delete
     suspend fun deleteUser(user: User)
 
-    @Query("SELECT * FROM users WHERE email = :email")
-    fun getUser(email: String): Flow<User>
+    @Query("SELECT * FROM users WHERE email = :email AND password = :password")
+    suspend fun getUserByEmail(email: String, password: String): User?
 
 }
