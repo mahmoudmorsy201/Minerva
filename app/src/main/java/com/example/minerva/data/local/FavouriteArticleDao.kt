@@ -12,7 +12,7 @@ interface FavouriteArticleDao {
     suspend fun insertFavouriteArticle(favouriteArticle: FavouriteArticle)
 
     @Query("SELECT * FROM favourites WHERE email = :userEmail")
-    fun getAllFavouriteArticles(userEmail: String): Flow<List<FavouriteArticle>>
+    fun getAllFavouriteArticlesByUserEmail(userEmail: String): Flow<List<FavouriteArticle>>
 
     @Delete
     suspend fun deleteFavouriteArticle(favouriteArticle: FavouriteArticle)
