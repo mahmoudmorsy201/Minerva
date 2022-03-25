@@ -51,6 +51,12 @@ class LoginFragment : Fragment() {
                 //todo show no userFound in the database
             } else {
                 Toast.makeText(context, "userFound ${it.email}", Toast.LENGTH_SHORT).show()
+                if (binding.rememberMeCheckbox.isChecked) {
+                    viewModel.saveUserDataInSharedPreferences(
+                        binding.emailTextInputEditText.text.toString(),
+                        AESEncyption.encrypt(binding.passwordTextInputEditText.text.toString())!!
+                    )
+                }
                 //todo navigate to main activity
             }
         }
