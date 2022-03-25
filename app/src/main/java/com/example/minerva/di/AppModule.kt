@@ -1,46 +1,35 @@
 package com.example.minerva.di
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
-import com.example.minerva.data.local.AppDataBase
+import com.example.minerva.data.local.AppDatabase
+
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.SupervisorJob
-import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-
     @Provides
     @Singleton
-    fun providesDataBase(
-        app: Application,
-        callback: AppDataBase.Callback
-    ) = Room.databaseBuilder(app, AppDataBase::class.java, "minvera_database")
-        .fallbackToDestructiveMigration()
-        .addCallback(callback)
+    fun providesDatabase(
+        @ApplicationContext app: Context,
+    ) = Room.databaseBuilder(app,
+        AppDatabase::class.java,
+        "minerva_database")
         .build()
 
 
     @Provides
-    fun providesUserDao(db: AppDataBase) = db.userDao()
+    @Singleton
+    fun providesUserDao(db: AppDatabase) = db.userDao()
 
-    @Provides
-    fun providesNewsDao(db: AppDataBase) = db.articlesDao()
-
-
-    @ApplicationScope
     @Provides
     @Singleton
-    fun providesApplicationScope() =
-        CoroutineScope(SupervisorJob())//when child of coroutine failed keep other child run
-
-    @Retention(AnnotationRetention.RUNTIME)
-    @Qualifier
-    annotation class ApplicationScope
+    fun providesArticlesDao(db: AppDatabase) = db.articlesDao()
 }

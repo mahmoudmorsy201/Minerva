@@ -10,7 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import com.example.minerva.R
 import com.example.minerva.data.model.User
 import com.example.minerva.databinding.FragmentSignUpBinding
-import com.example.minvera.usersystem.signup.SignUpFragmentViewModel
 import com.example.minvera.util.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch

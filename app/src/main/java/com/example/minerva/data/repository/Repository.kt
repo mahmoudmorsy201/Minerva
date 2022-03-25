@@ -6,20 +6,19 @@ import com.example.minerva.data.model.Article
 import com.example.minerva.data.model.NewsDto
 import com.example.minerva.data.model.User
 import com.example.minerva.data.remote.RetrofitService
-import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
+import javax.inject.Inject
+import javax.inject.Singleton
 
 
-@Module
-@InstallIn(SingletonComponent::class)
-class Repository(
+@Singleton
+class Repository @Inject constructor(
     private var retrofitService: RetrofitService,
     private var userDao: UserDao,
     private var articleDao: ArticleDao
 ) : RepositoryInterface {
+
     override suspend fun insertUser(user: User) {
         userDao.insertUser(user)
     }
