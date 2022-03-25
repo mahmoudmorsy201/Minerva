@@ -1,4 +1,4 @@
-package com.example.minvera.usersystem.signup
+package com.example.minerva.usersystem.signup
 
 import androidx.lifecycle.ViewModel
 import com.example.minerva.data.model.User

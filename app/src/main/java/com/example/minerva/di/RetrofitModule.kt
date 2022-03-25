@@ -33,7 +33,7 @@ object RetrofitModule {
 
     @Singleton
     @Provides
-    fun providesWeatherService(retrofit: Retrofit.Builder): RetrofitService {
+    fun providesNewsService(retrofit: Retrofit.Builder): RetrofitService {
         return retrofit
             .build().create(RetrofitService::class.java)
     }

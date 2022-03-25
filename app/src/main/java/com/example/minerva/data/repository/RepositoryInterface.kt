@@ -1,6 +1,6 @@
 package com.example.minerva.data.repository
 
-import com.example.minerva.data.model.FavouriteArticle
+import com.example.minerva.data.model.Article
 import com.example.minerva.data.model.NewsDto
 import com.example.minerva.data.model.User
 import kotlinx.coroutines.flow.Flow
@@ -17,12 +17,9 @@ interface RepositoryInterface {
     //For News Api Response
     suspend fun getNewsResponseFromApi(country: String): Response<NewsDto>
 
-    //For News table database
-    suspend fun insertNews(newsDto: NewsDto)
-    fun getStoredNewsResponse(): Flow<NewsDto>
-
     //For favourite articles
-    suspend fun insertFavouriteArticle(favouriteArticle: FavouriteArticle)
-    fun getStoredFavouriteArticlesByUserEmail(userEmail: String): Flow<List<FavouriteArticle>>
-    suspend fun deleteFavouriteArticle(favouriteArticle: FavouriteArticle)
+    suspend fun insertFavouriteArticle(favouriteArticle: Article)
+    suspend fun insertListOfArticles(articles: List<Article>)
+    fun getStoredFavouriteArticlesByUserEmail(userEmail: String): Flow<List<Article>>
+    suspend fun deleteFavouriteArticle(favouriteArticle: Article)
 }
