@@ -1,7 +1,6 @@
 package com.example.minerva.di
 
-import com.example.minerva.data.local.FavouriteArticleDao
-import com.example.minerva.data.local.NewsDao
+import com.example.minerva.data.local.ArticleDao
 import com.example.minerva.data.local.UserDao
 import com.example.minerva.data.remote.RetrofitService
 import com.example.minerva.data.repository.Repository
@@ -21,10 +20,9 @@ object RepositoryModule {
     fun provideMainRepository(
         retrofit: RetrofitService,
         userDao: UserDao,
-        newsDao: NewsDao,
-        favouriteArticleDao: FavouriteArticleDao
+        articlesDao: ArticleDao
     ): RepositoryInterface {
-        return Repository(retrofit, userDao, newsDao, favouriteArticleDao)
+        return Repository(retrofit, userDao,articlesDao)
     }
 }
 

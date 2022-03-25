@@ -31,10 +31,8 @@ object AppModule {
     fun providesUserDao(db: AppDataBase) = db.userDao()
 
     @Provides
-    fun providesNewsDao(db: AppDataBase) = db.newsDao()
+    fun providesNewsDao(db: AppDataBase) = db.articlesDao()
 
-    @Provides
-    fun providesFavouriteArticleDao(db: AppDataBase) = db.favouriteArticleDao()
 
     @ApplicationScope
     @Provides
