@@ -10,7 +10,7 @@ interface RepositoryInterface {
 
     //For User table
     suspend fun insertUser(user: User)
-    fun getUserByEmail(email: String): Flow<User>
+    suspend fun getUserByEmail(email: String, password: String): User?
     suspend fun updateUser(newUser: User)
     suspend fun deleteUser(user: User)
 

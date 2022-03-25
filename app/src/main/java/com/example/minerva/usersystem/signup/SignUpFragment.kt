@@ -6,12 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.minerva.R
+import com.example.minerva.data.model.User
 import com.example.minerva.databinding.FragmentSignUpBinding
 import com.example.minvera.usersystem.signup.SignUpFragmentViewModel
 import com.example.minvera.util.*
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 
+@AndroidEntryPoint
 class SignUpFragment : Fragment() {
 
     private var _binding: FragmentSignUpBinding? = null
@@ -28,7 +33,16 @@ class SignUpFragment : Fragment() {
 
         binding.signInButton.setOnClickListener() {
             if (isValidData()) {
-                //todo add data using repo and vm
+                lifecycleScope.launch {
+                    viewModel.addNewUser(
+                        User(
+                            binding.emailTextInputEditText.text.toString(),
+                            binding.userNameTextInputEditText.text.toString(),
+                            binding.mobileTextInputEditText.text.toString(),
+                            binding.passwordTextInputEditText.text.toString()
+                        )
+                    )
+                }
             }
         }
         return root
