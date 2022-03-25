@@ -9,4 +9,5 @@ data class Article(
     val title: String? = null,
     val url: String? = null,
     val urlToImage: Any? = null,
+
 )

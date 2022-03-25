@@ -11,10 +11,10 @@ interface FavouriteArticleDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFavouriteArticle(favouriteArticle: FavouriteArticle)
 
-    @Query("SELECT * FROM favourites")
-    fun getAllFavouriteArticles() : Flow<List<FavouriteArticle>>
+    @Query("SELECT * FROM favourites WHERE email = :userEmail")
+    fun getAllFavouriteArticles(userEmail: String): Flow<List<FavouriteArticle>>
 
     @Delete
-    suspend fun deleteFavouriteArticle()
+    suspend fun deleteFavouriteArticle(favouriteArticle: FavouriteArticle)
 
 }
