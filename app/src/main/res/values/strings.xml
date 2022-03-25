@@ -3,7 +3,8 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-
+    <string name="fakeFontent">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce pulvinar, ex nec commodo volutpat, neque purus ornare massa, vel facilisis enim tortor quis lorem. Nunc porta fermentum diam, vel imperdiet felis faucibus ac. Cras quis dolor non elit sodales pellentesque. Aliquam imperdiet massa neque, eu efficitur elit maximus et. In et odio tortor. Nullam ac est vitae metus sodales condimentum. Donec et suscipit nisl, id gravida lectus. Ut vulputate augue et turpis ullamcorper dapibus. Morbi venenatis fermentum neque ut efficitur. Quisque auctor tempor risus a placerat. Nunc sodales in arcu ut egestas. Etiam ultricies ornare tempus. Nulla viverra vulputate bibendum. Nam ac nisi nulla. Aenean tristique ligula dui, sed lobortis erat tincidunt eu.Nam in lorem non nisi tristique tristique. Vivamus id sem eu nisl aliquet hendrerit non et ipsum. Cras odio lacus, scelerisque sed velit quis, scelerisque tristique quam. In posuere tortor nisi, ac lobortis tortor aliquam vel. Curabitur vitae sagittis purus. Nulla mollis dui eget nisi sollicitudin, sit amet tempor dolor interdum. Vivamus tincidunt lectus eget neque ultricies accumsan. Fusce blandit vestibulum mi, in cursus lorem rutrum vestibulum. Proin auctor elit quis ipsum molestie convallis. Maecenas ipsum sem, bibendum eget lorem quis, finibus consequat enim.</string>
+    <string name="open">Open</string>
     <string name="create_an_account">Create an account</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
@@ -21,5 +22,4 @@
     <string name="invalid_mobile_number">Please enter a valid mobile number</string>
     <string name="settings">Settings</string>
     <string name="change_password">Change password</string>
-
 </resources>

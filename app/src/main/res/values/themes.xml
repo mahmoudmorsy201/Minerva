@@ -14,6 +14,10 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="DescriptionTextView" parent="Theme.AppCompat">
+
+    </style>
+
     <style name="AppTheme.loginSignUp_textInputTextLayout" parent="Widget.Design.TextInputLayout">
         <item name="android:textSize">20sp</item>
         <item name="android:minHeight">52dp</item>
