@@ -5,11 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.minerva.R
 import com.example.minerva.data.model.User
 import com.example.minerva.databinding.FragmentSignUpBinding
+import com.example.minerva.util.AESEncyption
 import com.example.minvera.util.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -32,13 +34,14 @@ class SignUpFragment : Fragment() {
 
         binding.signInButton.setOnClickListener {
             if (isValidData()) {
+
                 lifecycleScope.launch {
                     viewModel.addNewUser(
                         User(
                             binding.emailTextInputEditText.text.toString(),
                             binding.userNameTextInputEditText.text.toString(),
                             binding.mobileTextInputEditText.text.toString(),
-                            binding.passwordTextInputEditText.text.toString()
+                            AESEncyption.encrypt(binding.passwordTextInputEditText.text.toString())!!
                         )
                     )
                 }
