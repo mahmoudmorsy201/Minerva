@@ -1,4 +1,4 @@
-package com.example.minvera
+package com.example.minerva
 
 import org.junit.Test
 

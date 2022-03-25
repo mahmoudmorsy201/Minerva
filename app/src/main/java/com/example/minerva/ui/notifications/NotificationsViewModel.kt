@@ -1,4 +1,4 @@
-package com.example.minvera.ui.notifications
+package com.example.minerva.ui.notifications
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
