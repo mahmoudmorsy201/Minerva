@@ -5,7 +5,9 @@ import android.os.Bundle
 import androidx.navigation.findNavController
 import com.example.minerva.R
 import com.example.minerva.databinding.ActivityLoginRegisterBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginRegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginRegisterBinding

@@ -16,7 +16,7 @@ interface UserDao {
     @Delete
     suspend fun deleteUser(user: User)
 
-    @Query("SELECT * FROM users WHERE email = :email")
-    fun getUserByEmail(email: String): Flow<User>
+    @Query("SELECT * FROM users WHERE email = :email AND password = :password")
+    suspend fun getUserByEmail(email: String, password: String): User?
 
 }

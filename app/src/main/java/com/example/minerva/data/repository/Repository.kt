@@ -26,7 +26,8 @@ class Repository(
         userDao.insertUser(user)
     }
 
-    override fun getUserByEmail(email: String): Flow<User> = userDao.getUserByEmail(email)
+    override suspend fun getUserByEmail(email: String, password: String): User? =
+        userDao.getUserByEmail(email, password)
 
     override suspend fun updateUser(newUser: User) {
         userDao.updateUserData(newUser)

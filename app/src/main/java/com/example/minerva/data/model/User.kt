@@ -10,4 +10,8 @@ data class User(
     val name: String,
     val phoneNumber: String,
     val password: String
-)
+) {
+    override fun toString(): String {
+        return "User(email='$email', name='$name', phoneNumber='$phoneNumber', password='$password')"
+    }
+}

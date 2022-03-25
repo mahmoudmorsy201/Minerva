@@ -5,14 +5,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.coroutineScope
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.minerva.R
 import com.example.minerva.databinding.FragmentLoginBinding
 import com.example.minvera.util.isValidEmail
 import com.example.minvera.util.isValidPassword
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
 
+    private val viewModel: LoginViewModel by viewModels()
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
@@ -24,8 +32,27 @@ class LoginFragment : Fragment() {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        //Eslam@eslam.com
+        //asdasdasda
         binding.signInButton.setOnClickListener() {
-            isValidData()
+            if (isValidData()) {
+                lifecycle.coroutineScope.launch {
+                    viewModel.checkUserCredentials(
+                        binding.emailTextInputEditText.text.toString(),
+                        binding.passwordTextInputEditText.text.toString()
+                    )
+                }
+            }
+        }
+
+        viewModel.user.observe(viewLifecycleOwner) {
+            if (it == null) {
+                Toast.makeText(context, "UserNotFound", Toast.LENGTH_SHORT).show()
+                //todo show no userFound in the database
+            } else {
+                Toast.makeText(context, "userFound ${it.email}", Toast.LENGTH_SHORT).show()
+                //todo navigate to main activity
+            }
         }
 
         binding.signUpTextView.setOnClickListener() {
