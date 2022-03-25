@@ -1,6 +1,7 @@
 package com.example.minerva.usersystem.login
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.minerva.R
 import com.example.minerva.databinding.FragmentLoginBinding
+import com.example.minerva.util.AESEncyption
 import com.example.minvera.util.isValidEmail
 import com.example.minvera.util.isValidPassword
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,14 +34,12 @@ class LoginFragment : Fragment() {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        //Eslam@eslam.com
-        //asdasdasda
         binding.signInButton.setOnClickListener() {
             if (isValidData()) {
                 lifecycle.coroutineScope.launch {
                     viewModel.checkUserCredentials(
                         binding.emailTextInputEditText.text.toString(),
-                        binding.passwordTextInputEditText.text.toString()
+                        AESEncyption.encrypt(binding.passwordTextInputEditText.text.toString())!!
                     )
                 }
             }
@@ -51,6 +51,12 @@ class LoginFragment : Fragment() {
                 //todo show no userFound in the database
             } else {
                 Toast.makeText(context, "userFound ${it.email}", Toast.LENGTH_SHORT).show()
+                if (binding.rememberMeCheckbox.isChecked) {
+                    viewModel.saveUserDataInSharedPreferences(
+                        binding.emailTextInputEditText.text.toString(),
+                        AESEncyption.encrypt(binding.passwordTextInputEditText.text.toString())!!
+                    )
+                }
                 //todo navigate to main activity
             }
         }

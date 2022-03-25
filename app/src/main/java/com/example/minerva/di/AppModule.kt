@@ -1,6 +1,5 @@
 package com.example.minerva.di
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import com.example.minerva.data.local.AppDatabase
@@ -19,11 +18,12 @@ object AppModule {
     @Singleton
     fun providesDatabase(
         @ApplicationContext app: Context,
-    ) = Room.databaseBuilder(app,
+    ) = Room.databaseBuilder(
+        app,
         AppDatabase::class.java,
-        "minerva_database")
+        "minerva_database"
+    )
         .build()
-
 
     @Provides
     @Singleton

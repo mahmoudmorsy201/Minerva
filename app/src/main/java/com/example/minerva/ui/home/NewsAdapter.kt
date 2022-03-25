@@ -39,7 +39,6 @@ class NewsAdapter(var newsList: MutableList<Article>) :
             holder.view.addFavouriteHomeImageView.setImageResource(R.drawable.ic_added_favorite_24)
         Glide.with(holder.view.HomeImageView.context)
             .load(item.urlToImage)
-            .placeholder(R.drawable.testimage)
             .into(holder.view.HomeImageView)
 
     }
