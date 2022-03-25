@@ -30,7 +30,7 @@ class SignUpFragment : Fragment() {
         _binding = FragmentSignUpBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        binding.signInButton.setOnClickListener() {
+        binding.signInButton.setOnClickListener {
             if (isValidData()) {
                 lifecycleScope.launch {
                     viewModel.addNewUser(
