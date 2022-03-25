@@ -28,16 +28,16 @@
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             android:src="@drawable/images"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guideline"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/titleHomeTextView"
             android:layout_width="0dp"
-            android:maxLength="50"
             android:layout_height="wrap_content"
+            android:maxLength="50"
             android:paddingStart="16dp"
             android:paddingTop="12dp"
             android:paddingEnd="16dp"
@@ -54,10 +54,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="16dp"
+            android:paddingTop="8dp"
             android:paddingEnd="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toTopOf="@+id/imageView2"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/titleHomeTextView"
             tools:text="Author" />
 
         <ImageView
@@ -66,14 +66,15 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:src="@drawable/ic_baseline_settings_24"
-            app:layout_constraintBottom_toBottomOf="@+id/HomeImageView"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@+id/dateHomeTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/authorHomeTextview" />
 
-        <ImageView
+        <TextView
             android:id="@+id/imageView2"
-            android:layout_width="24dp"
+            android:layout_width="wrap_content"
             android:layout_height="24dp"
-            android:src="@drawable/source"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/titleHomeTextView" />
 
@@ -81,9 +82,11 @@
             android:id="@+id/dateHomeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="12-12-2002"
+            android:paddingTop="8dp"
+            android:paddingStart="16dp"
             app:layout_constraintStart_toStartOf="@+id/authorHomeTextview"
-            app:layout_constraintTop_toTopOf="@+id/addFavouriteHomeImageView" />
+            app:layout_constraintTop_toBottomOf="@+id/authorHomeTextview"
+            tools:text="12-12-2002" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
