@@ -35,7 +35,9 @@ class Repository @Inject constructor(
     }
 
     override suspend fun getNewsResponseFromApi(country: String): Response<NewsDto> =
-        retrofitService.getAllStatusWeatherByLatLon(country)
+        retrofitService.getNewsFromApi(country).also {
+            it.body()?.let { it1 -> insertListOfArticles(it1.articles) }
+        }
 
 
     override suspend fun insertFavouriteArticle(favouriteArticle: Article) {
@@ -53,5 +55,9 @@ class Repository @Inject constructor(
     override suspend fun deleteFavouriteArticle(favouriteArticle: Article) {
         articleDao.deleteFavouriteArticle(favouriteArticle)
     }
+
+    override fun getLocalArticle(): Flow<List<Article>> =
+        articleDao.getArticlesFromRoom()
+
 
 }

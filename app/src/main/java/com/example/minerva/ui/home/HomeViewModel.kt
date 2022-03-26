@@ -1,12 +1,16 @@
 package com.example.minerva.ui.home
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.example.minerva.data.model.Article
 import com.example.minerva.data.model.NewsDto
 import com.example.minerva.data.repository.RepositoryInterface
+import com.example.minerva.util.InternetConnectivity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import com.example.minvera.util.*
+import kotlinx.coroutines.flow.toList
 import javax.inject.Inject
 
 @HiltViewModel
@@ -16,5 +20,9 @@ class HomeViewModel @Inject constructor(private val repo: RepositoryInterface) :
         val data = repo.getNewsResponseFromApi("us")
         emit(data.body()!!)
     }
+
+    //val resultFromRoom: Flow<List<Article>> = repo.getLocalArticle()
+
+    fun getLocalArticles() = repo.getLocalArticle()
 
 }
