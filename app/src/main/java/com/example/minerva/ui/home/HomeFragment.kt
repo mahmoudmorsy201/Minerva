@@ -13,6 +13,7 @@ import com.example.minerva.R
 import com.example.minerva.data.model.Article
 import com.example.minerva.data.model.NewsDto
 import com.example.minerva.databinding.FragmentHomeBinding
+
 import com.example.minerva.util.InternetConnectivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -89,7 +90,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
 
         })
-        newsAdapter = NewsAdapter(arrayListOf())
+        newsAdapter = NewsAdapter(arrayListOf()) {
+            if (it != null) {
+                viewLifecycleOwner.lifecycleScope.launch {
+                    it.isFavourite = true
+                    viewModel.insertIntoFavourite(it)
+                }
+            }
+        }
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.result
                 .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
@@ -134,6 +143,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
         binding.titleHomeTextView.text = news.articles[0].title
         newsAdapter.changeData(news.articles.subList(1, news.articles.size))
+
+
     }
 
 

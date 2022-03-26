@@ -27,6 +27,8 @@ class NewsAdapter(var newsList: MutableList<Article>, private val onSelect: (Art
         notifyDataSetChanged()
     }
 
+
+
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         val item = newsList[position]
 
