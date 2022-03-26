@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.example.minerva.R
 import com.example.minerva.data.model.Article
 import com.example.minerva.databinding.DetailsFragmentBinding
@@ -40,9 +41,16 @@ class DetailsFragment : Fragment(R.layout.details_fragment) {
     }
 
     private fun setUI(str: Article) {
-        binding.titleDetailsTextView.text = str.title
+        binding.toolBar.title = str.title
+        binding.titleDetailsTextView.text = str.description
         binding.sourceDetailsTextView.text = str.source?.name
         binding.dateDetailsTextView.text = str.publishedAt?.substringBeforeLast("T")
+        binding.descriptionDetailsTextView.text = str.content
+        Glide.with(requireContext())
+            .load(str.urlToImage)
+            .placeholder(R.drawable.images)
+            .into(binding.detailsHeaderImageView)
+
         setFavouritebackground(str.isFavourite)
 
         binding.openSourceDetailsImageButton.setOnClickListener {
