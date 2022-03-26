@@ -40,6 +40,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val root: View = binding.root
         connectionLiveData = InternetConnectivity(requireContext())
 
+
+        newsAdapter = NewsAdapter(arrayListOf()) {
+            if (it != null) {
+                viewLifecycleOwner.lifecycleScope.launch {
+                    it.isFavourite = true
+                    viewModel.insertIntoFavourite(it)
+                }
+            }
+        }
+
         binding.searchHomeSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -132,6 +142,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             adapter = newsAdapter
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

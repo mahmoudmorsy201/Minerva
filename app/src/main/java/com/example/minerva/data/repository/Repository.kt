@@ -52,13 +52,14 @@ class Repository @Inject constructor(
         articleDao.insertListOfArticles(articles)
     }
 
-    override fun getStoredFavouriteArticlesByUserEmail(userEmail: String): Flow<List<Article>> =
+    override  fun getStoredFavouriteArticlesByUserEmail(userEmail: String): Flow<List<Article>> =
         articleDao.getAllFavouriteArticlesByUserEmail(userEmail)
 
+    override fun getStoredFavouriteArticles(searchQuery: String): Flow<List<Article>> =
+        articleDao.getAllFavouriteArticles(searchQuery)
 
-    override suspend fun deleteFavouriteArticle(favouriteArticle: Article) {
-        articleDao.deleteFavouriteArticle(favouriteArticle)
-    }
+
+
 
     override fun getLocalArticle(): Flow<List<Article>> =
         articleDao.getArticlesFromRoom()
