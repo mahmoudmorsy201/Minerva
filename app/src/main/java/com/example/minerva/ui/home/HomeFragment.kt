@@ -1,7 +1,6 @@
 package com.example.minerva.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,10 +12,8 @@ import com.example.minerva.R
 import com.example.minerva.data.model.NewsDto
 import com.example.minerva.databinding.FragmentHomeBinding
 import com.example.minerva.util.InternetConnectivity
-import com.example.minvera.util.checkForInternet
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -24,7 +21,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val viewModel: HomeViewModel by viewModels()
     private var _binding: FragmentHomeBinding? = null
-    protected lateinit var connectionLiveData: InternetConnectivity
+    private lateinit var connectionLiveData: InternetConnectivity
 
     private val binding get() = _binding!!
     lateinit var newsAdapter: NewsAdapter

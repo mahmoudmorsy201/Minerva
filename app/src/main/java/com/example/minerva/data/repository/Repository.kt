@@ -1,6 +1,7 @@
 package com.example.minerva.data.repository
 
 import com.example.minerva.data.local.ArticleDao
+import com.example.minerva.data.sharedpref.MyPreference
 import com.example.minerva.data.local.UserDao
 import com.example.minerva.data.model.Article
 import com.example.minerva.data.model.NewsDto
@@ -16,7 +17,8 @@ import javax.inject.Singleton
 class Repository @Inject constructor(
     private var retrofitService: RetrofitService,
     private var userDao: UserDao,
-    private var articleDao: ArticleDao
+    private var articleDao: ArticleDao,
+    private var sharedPref: MyPreference
 ) : RepositoryInterface {
 
     override suspend fun insertUser(user: User) {
@@ -39,12 +41,14 @@ class Repository @Inject constructor(
             it.body()?.let { it1 -> insertListOfArticles(it1.articles) }
         }
 
-
     override suspend fun insertFavouriteArticle(favouriteArticle: Article) {
         articleDao.insertFavouriteArticle(favouriteArticle)
     }
 
     override suspend fun insertListOfArticles(articles: List<Article>) {
+        articles.forEach {
+            it.email = sharedPref.getUserEmail()
+        }
         articleDao.insertListOfArticles(articles)
     }
 

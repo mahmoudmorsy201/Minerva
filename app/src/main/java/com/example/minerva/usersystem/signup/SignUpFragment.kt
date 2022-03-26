@@ -1,5 +1,6 @@
 package com.example.minerva.usersystem.signup
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.minerva.MainActivity
 import com.example.minerva.R
 import com.example.minerva.data.model.User
 import com.example.minerva.databinding.FragmentSignUpBinding
@@ -44,10 +46,22 @@ class SignUpFragment : Fragment() {
                             AESEncyption.encrypt(binding.passwordTextInputEditText.text.toString())!!
                         )
                     )
+
+                    viewModel.saveUserDataInSharedPreferences(
+                        binding.emailTextInputEditText.text.toString(),
+                        AESEncyption.encrypt(binding.passwordTextInputEditText.text.toString())!!
+                    )
+
+                    navigateToMainScreen()
                 }
             }
         }
         return root
+    }
+
+    fun navigateToMainScreen() {
+        requireActivity().startActivity(Intent(activity, MainActivity::class.java))
+        requireActivity().finish()
     }
 
     override fun onDestroyView() {

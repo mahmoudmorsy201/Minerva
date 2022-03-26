@@ -1,15 +1,13 @@
 package com.example.minerva.usersystem.login
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.minerva.data.local.MyPreference
+import com.example.minerva.data.sharedpref.MyPreference
 import com.example.minerva.data.model.User
 import com.example.minerva.data.repository.RepositoryInterface
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlin.math.log
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
@@ -27,6 +25,10 @@ class LoginViewModel @Inject constructor(
     fun saveUserDataInSharedPreferences(email: String, password: String) {
         sharedPreferences.setUserEmail(email)
         sharedPreferences.setUserPassword(password)
+    }
+
+    fun checkIfUserExits(): Boolean {
+        return sharedPreferences.getUserEmail() != ""
     }
 
 }
