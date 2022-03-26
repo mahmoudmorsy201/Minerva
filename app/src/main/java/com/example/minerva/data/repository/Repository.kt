@@ -63,8 +63,8 @@ class Repository @Inject constructor(
         articleDao.getAllFavouriteArticles(searchQuery)
 
 
-    override fun getLocalArticle(): Flow<List<Article>> =
-        articleDao.getArticlesFromRoom()
+    override fun getLocalArticle(searchQuery: String): Flow<List<Article>> =
+        articleDao.getArticlesFromRoom(searchQuery)
 
 
 }

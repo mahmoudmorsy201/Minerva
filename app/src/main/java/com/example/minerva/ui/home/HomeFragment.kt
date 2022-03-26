@@ -15,6 +15,7 @@ import com.example.minerva.data.model.NewsDto
 import com.example.minerva.databinding.FragmentHomeBinding
 
 import com.example.minerva.util.InternetConnectivity
+import com.example.minerva.util.onQueryTextChange
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
@@ -25,10 +26,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val viewModel: HomeViewModel by viewModels()
     private var _binding: FragmentHomeBinding? = null
     private lateinit var connectionLiveData: InternetConnectivity
-
-    private var mainList: MutableList<Article> = arrayListOf()
-    private var searchResultList: MutableList<Article> = arrayListOf()
-
     private val binding get() = _binding!!
     lateinit var newsAdapter: NewsAdapter
     override fun onCreateView(
@@ -51,45 +48,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
         }
 
-        binding.searchHomeSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
-            androidx.appcompat.widget.SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query!!.isNotEmpty()) {
-                    searchResultList.clear()
-                    searchResultList.addAll(
-                        mainList.filter {
-                            it.title!!.lowercase().contains(query.lowercase())
-                        }
-                    )
-                    newsAdapter.changeData(searchResultList)
-                } else {
-                    newsAdapter.changeData(mainList)
-                }
-                searchResultList.clear()
-
-                return true
-
-            }
-
-            override fun onQueryTextChange(query: String?): Boolean {
-                if (query!!.isNotEmpty()) {
-                    searchResultList.clear()
-                    searchResultList.addAll(
-                        mainList.filter {
-                            it.title!!.lowercase().contains(query.lowercase())
-                        }
-                    )
-                    newsAdapter.changeData(searchResultList)
-                } else {
-                    newsAdapter.changeData(mainList)
-                }
-                searchResultList.clear()
-
-                return true
-            }
 
 
-        })
         newsAdapter = NewsAdapter(arrayListOf()) {
             if (it != null) {
                 viewLifecycleOwner.lifecycleScope.launch {
@@ -101,6 +61,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
 
         initRecycler()
+        setSearchView()
 
         connectionLiveData.observe(viewLifecycleOwner) { isAvailable ->
             when (isAvailable) {
@@ -109,22 +70,31 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                         .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
                         .distinctUntilChanged()
                         .collect { data ->
-                            mainList.clear()
-                            mainList.addAll(data.articles.subList(0, data.articles.size))
-                            viewModel.getLocalArticles().asLiveData().observe(viewLifecycleOwner) {
-                                displayResult(it)
+
+                            viewModel.searchedArticles.observe(viewLifecycleOwner) {
+                                if (it.isEmpty()) {
+                                    displayResult(data.articles)
+                                } else {
+                                    displayResult(it)
+                                }
                             }
                         }
                 }
 
                 false -> {
-                    viewModel.getLocalArticles().asLiveData().observe(viewLifecycleOwner) {
+                    viewModel.searchedArticles.observe(viewLifecycleOwner) {
                         newsAdapter.changeData(it)
                     }
                 }
             }
         }
         return root
+    }
+
+    private fun setSearchView() {
+        binding.searchHomeSearchView.onQueryTextChange {
+            viewModel.searchQuery.value = it
+        }
     }
 
     private fun displayResult(news: List<Article>) {

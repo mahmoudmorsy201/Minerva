@@ -25,6 +25,6 @@ interface RepositoryInterface {
     fun getStoredFavouriteArticles(searchQuery: String): Flow<List<Article>>
 
     //for room articles
-    fun getLocalArticle(): Flow<List<Article>>
+    fun getLocalArticle(searchQuery: String): Flow<List<Article>>
 
 }
