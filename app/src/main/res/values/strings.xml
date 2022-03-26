@@ -24,4 +24,5 @@
     <string name="change_password">Change password</string>
     <string name="read_more">Read more</string>
     <string name="favourites">Favourites</string>
+    <string name="search">Search here …</string>
 </resources>
