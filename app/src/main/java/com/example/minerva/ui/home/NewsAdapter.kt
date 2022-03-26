@@ -35,14 +35,20 @@ class NewsAdapter(var newsList: MutableList<Article>, private val onSelect: (Art
         holder.view.titleHomeTextView.text = item.title
         holder.view.dateHomeTextView.text = item.publishedAt?.substringBeforeLast("T")
         holder.view.authorHomeTextview.text = item.author
+
+        if (item.isFavourite)
+            holder.view.addFavouriteHomeImageView.setImageResource(R.drawable.ic_added_favorite_24)
+        else
+            holder.view.addFavouriteHomeImageView.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+
         holder.view.addFavouriteHomeImageView.setOnClickListener {
             onSelect(item)
             holder.view.addFavouriteHomeImageView.setImageResource(R.drawable.ic_added_favorite_24)
         }
-        if (item.isFavourite)
-            holder.view.addFavouriteHomeImageView.setImageResource(R.drawable.ic_added_favorite_24)
+
         Glide.with(holder.view.HomeImageView.context)
             .load(item.urlToImage)
+            .placeholder(R.drawable.testimage)
             .into(holder.view.HomeImageView)
 
     }

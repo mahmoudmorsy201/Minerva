@@ -111,7 +111,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                         .collect { data ->
                             mainList.clear()
                             mainList.addAll(data.articles.subList(0, data.articles.size))
-                            displayResult(data)
+                            viewModel.getLocalArticles().asLiveData().observe(viewLifecycleOwner) {
+                                displayResult(it)
+
+                            }
                         }
                 }
 
@@ -126,14 +129,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         return root
     }
 
-    private fun displayResult(news: NewsDto) {
+    private fun displayResult(news: List<Article>) {
         lifecycle.coroutineScope.launch {
             Glide.with(binding.featuredHomeArticleImageView)
-                .load(news.articles[0].urlToImage)
+                .load(news[0].urlToImage)
+                .placeholder(R.drawable.testimage)
                 .into(binding.featuredHomeArticleImageView)
         }
-        binding.titleHomeTextView.text = news.articles[0].title
-        newsAdapter.changeData(news.articles.subList(1, news.articles.size))
+        binding.titleHomeTextView.text = news[0].title
+        newsAdapter.changeData(news.subList(1, news.size))
 
 
     }
