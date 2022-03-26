@@ -17,7 +17,7 @@ import androidx.room.PrimaryKey
 data class Article(
     @PrimaryKey
     val url: String,
-    val email: String,
+    val email: String = "Eslam@mail.com",
     val author: String? = null,
     val content: String? = null,
     val description: String? = null,

@@ -10,7 +10,7 @@ const val API_KEY = "cfb6154624504c3a9e93bc4ab969e941"
 
 interface RetrofitService {
     @GET("top-headlines")
-    suspend fun getAllStatusWeatherByLatLon(
+    suspend fun getNewsFromApi(
         @Query("country") country: String = "us",
         @Query("apiKey") apiKey: String = API_KEY
     ): Response<NewsDto>
