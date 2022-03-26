@@ -7,26 +7,22 @@
     android:background="@color/main_bg"
     tools:context=".ui.home.HomeFragment">
 
-
     <com.airbnb.lottie.LottieAnimationView
-        android:src=""
-        android:visibility="visible"
-
         android:id="@+id/loadingLottieAnimationView"
         android:layout_width="200dp"
         android:layout_height="200dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <LinearLayout
         android:id="@+id/mainViewLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
