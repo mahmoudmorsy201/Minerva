@@ -13,15 +13,15 @@ interface ArticleDao {
     suspend fun insertFavouriteArticle(favouriteArticle: Article)
 
     @Query("SELECT * FROM articles WHERE title LIKE '%' || :searchQuery || '%' AND isFavourite = :isFavourite")
-    fun getAllFavouriteArticles(searchQuery: String,isFavourite: Boolean = true) : Flow<List<Article>>
+    fun getAllFavouriteArticles(
+        searchQuery: String,
+        isFavourite: Boolean = true
+    ): Flow<List<Article>>
 
     @Query("SELECT * FROM articles WHERE email = :userEmail")
     fun getAllFavouriteArticlesByUserEmail(userEmail: String): Flow<List<Article>>
 
     @Query("SELECT * FROM articles")
     fun getArticlesFromRoom(): Flow<List<Article>>
-
-//    @Query("SELECT * FROM articles WHERE title LIKE '%' || :searchQuery || '%' AND isFavourite = :isFavourite")
-//    fun getFavouriteArticlesBySearch(searchQuery: String,isFavourite: Boolean = true) : Flow<List<Article>>
 
 }

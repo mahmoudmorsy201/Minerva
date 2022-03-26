@@ -27,12 +27,4 @@ class HomeViewModel @Inject constructor(private val repo: RepositoryInterface) :
         repo.insertFavouriteArticle(article)
     }
 
-    fun filterData(newsList: List<Article> , localList: List<Article>) {
-        val sum = newsList + localList
-        val result = sum.groupBy{it.isFavourite}
-            .filter { it.value.size == 1 }
-            .flatMap { it.value }
-    }
-
-
 }

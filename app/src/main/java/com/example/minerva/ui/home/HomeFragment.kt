@@ -25,10 +25,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val viewModel: HomeViewModel by viewModels()
     private var _binding: FragmentHomeBinding? = null
     private lateinit var connectionLiveData: InternetConnectivity
-
-    private var mainList: MutableList<Article> = arrayListOf()
-    private var searchResultList: MutableList<Article> = arrayListOf()
-
     private val binding get() = _binding!!
     lateinit var newsAdapter: NewsAdapter
     override fun onCreateView(
@@ -51,45 +47,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
         }
 
-        binding.searchHomeSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
-            androidx.appcompat.widget.SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query!!.isNotEmpty()) {
-                    searchResultList.clear()
-                    searchResultList.addAll(
-                        mainList.filter {
-                            it.title!!.lowercase().contains(query.lowercase())
-                        }
-                    )
-                    newsAdapter.changeData(searchResultList)
-                } else {
-                    newsAdapter.changeData(mainList)
-                }
-                searchResultList.clear()
-
-                return true
-
-            }
-
-            override fun onQueryTextChange(query: String?): Boolean {
-                if (query!!.isNotEmpty()) {
-                    searchResultList.clear()
-                    searchResultList.addAll(
-                        mainList.filter {
-                            it.title!!.lowercase().contains(query.lowercase())
-                        }
-                    )
-                    newsAdapter.changeData(searchResultList)
-                } else {
-                    newsAdapter.changeData(mainList)
-                }
-                searchResultList.clear()
-
-                return true
-            }
 
 
-        })
         newsAdapter = NewsAdapter(arrayListOf()) {
             if (it != null) {
                 viewLifecycleOwner.lifecycleScope.launch {
@@ -109,10 +68,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                         .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
                         .distinctUntilChanged()
                         .collect { data ->
-                            mainList.clear()
-                            mainList.addAll(data.articles.subList(0, data.articles.size))
                             viewModel.getLocalArticles().asLiveData().observe(viewLifecycleOwner) {
-                                displayResult(it)
+                                if (it.isEmpty()) {
+                                    displayResult(data.articles)
+                                } else {
+                                    displayResult(it)
+                                }
+
 
                             }
                         }
