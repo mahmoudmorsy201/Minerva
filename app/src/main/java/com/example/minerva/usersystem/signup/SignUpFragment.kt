@@ -78,7 +78,7 @@ class SignUpFragment : Fragment() {
 
         if (isValidUserName(binding.userNameTextInputEditText.text.toString())) {
             if (isValidEmail(binding.emailTextInputEditText.text.toString())) {
-                if (isValidMobileNumber(binding.mobileTextInputEditText.text.toString())) {
+                if (isValidMobileNumberUsingRegex(binding.mobileTextInputEditText.text.toString())) {
                     if (isValidPassword(binding.passwordTextInputEditText.text.toString())) {
                         result = true
                     } else {

@@ -48,6 +48,16 @@ fun isValidMobileNumber(string: String): Boolean {
     return result
 }
 
+fun isValidMobileNumberUsingRegex(string: String): Boolean {
+    var result = false
+
+
+    val pattern = "^01[0-2,5]{1}[0-9]{8}\$"
+    result = string.matches(pattern.toRegex())
+
+    return result
+}
+
 fun checkForInternet(context: Context): Boolean {
 
     val connectivityManager =
