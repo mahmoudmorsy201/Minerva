@@ -48,7 +48,7 @@ class NewsAdapter(var newsList: MutableList<Article>, private val onSelect: (Art
 
         Glide.with(holder.view.HomeImageView.context)
             .load(item.urlToImage)
-            .placeholder(R.drawable.testimage)
+            .placeholder(R.drawable.images)
             .into(holder.view.HomeImageView)
 
     }

@@ -15,5 +15,7 @@
     <color name="login_register_hint_color">#0940CA</color>
     <color name="login_register_text_color">#0940CA</color>
     <color name="main_bg">#40E6E6E6</color>
+    <color name="shimmer_placeholder">#dddddd</color>
+
 
 </resources>
