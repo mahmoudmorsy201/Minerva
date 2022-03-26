@@ -36,6 +36,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        binding.shimmerHome.visibility = View.VISIBLE
+        binding.shimmerHome.startShimmer()
+
         connectionLiveData = InternetConnectivity(requireContext())
 
 
@@ -67,6 +71,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                                     displayResult(data.articles)
                                 } else {
                                     displayResult(it)
+                                    binding.lottieAnimationView.visibility = View.GONE
+                                    binding.scrollviewHome.visibility = View.VISIBLE
                                 }
                             }
                         }
@@ -74,7 +80,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
                 false -> {
                     viewModel.searchedArticles.observe(viewLifecycleOwner) {
-                        newsAdapter.changeData(it)
+                        if (it.isEmpty()) {
+                            binding.lottieAnimationView.visibility = View.VISIBLE
+                            binding.shimmerHome.visibility = View.GONE
+                            binding.scrollviewHome.visibility = View.GONE
+                        } else {
+                            //newsAdapter.changeData(it)
+                            displayResult(it)
+                        }
                     }
                 }
             }
@@ -97,6 +110,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
         binding.titleHomeTextView.text = news[0].title
         newsAdapter.changeData(news.subList(1, news.size))
+
+        binding.shimmerHome.stopShimmer()
+        binding.shimmerHome.visibility = View.GONE
+        binding.scrollviewHome.visibility = View.VISIBLE
 
         binding.readMoreHomeButton.setOnClickListener {
             viewModel.NavigateToDetails(
