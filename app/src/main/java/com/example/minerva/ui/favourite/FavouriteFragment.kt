@@ -32,14 +32,16 @@ class FavouriteFragment : Fragment() {
         _binding = FragmentFavouriteBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        favouriteArticlesAdapter = FavouriteArticlesAdapter(arrayListOf()) {
+        favouriteArticlesAdapter = FavouriteArticlesAdapter(arrayListOf(), {
             if (it != null) {
                 viewLifecycleOwner.lifecycleScope.launch {
                     it.isFavourite = false
                     viewModel.updateFavouriteArticle(it)
                 }
             }
-        }
+        },{
+            viewModel.NavigateToDetails(it, binding.root)
+        })
 
         initRecycler()
         displayResult()

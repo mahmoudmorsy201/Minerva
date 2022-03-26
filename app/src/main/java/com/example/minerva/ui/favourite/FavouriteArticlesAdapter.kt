@@ -11,7 +11,8 @@ import com.example.minerva.databinding.ItemNewsHomeBinding
 
 class FavouriteArticlesAdapter(
     var newsList: MutableList<Article>,
-    private val onSelect: (Article?) -> Unit
+    private val onSelect: (Article?) -> Unit,
+    private val onNewsClicked: (Article) -> Unit
 ) : RecyclerView.Adapter<FavouriteArticlesAdapter.FavouriteViewHolder>() {
 
 
@@ -41,6 +42,10 @@ class FavouriteArticlesAdapter(
         }
         if (item.isFavourite)
             holder.view.addFavouriteHomeImageView.setImageResource(R.drawable.ic_added_favorite_24)
+
+        holder.view.root.setOnClickListener {
+            onNewsClicked(item)
+        }
         Glide.with(holder.view.HomeImageView.context)
             .load(item.urlToImage)
             .into(holder.view.HomeImageView)
