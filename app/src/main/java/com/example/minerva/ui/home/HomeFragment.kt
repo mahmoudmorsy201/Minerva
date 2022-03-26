@@ -42,14 +42,17 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         connectionLiveData = InternetConnectivity(requireContext())
 
 
-        newsAdapter = NewsAdapter(arrayListOf()) {
+        newsAdapter = NewsAdapter(arrayListOf(), {
             if (it != null) {
                 viewLifecycleOwner.lifecycleScope.launch {
                     it.isFavourite = true
                     viewModel.insertIntoFavourite(it)
                 }
             }
-        }
+        }, {
+            viewModel.NavigateToDetails(it, binding.root)
+
+        })
 
         binding.searchHomeSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
@@ -90,14 +93,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
 
         })
-        newsAdapter = NewsAdapter(arrayListOf()) {
-            if (it != null) {
-                viewLifecycleOwner.lifecycleScope.launch {
-                    it.isFavourite = true
-                    viewModel.insertIntoFavourite(it)
+        newsAdapter = NewsAdapter(
+            arrayListOf(),
+            {
+                if (it != null) {
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        it.isFavourite = true
+                        viewModel.insertIntoFavourite(it)
+                    }
                 }
+            }, {
+                viewModel.NavigateToDetails(it, binding.root)
             }
-        }
+        )
 
 
         initRecycler()
@@ -133,12 +141,18 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         lifecycle.coroutineScope.launch {
             Glide.with(binding.featuredHomeArticleImageView)
                 .load(news[0].urlToImage)
-                .placeholder(R.drawable.testimage)
+                .placeholder(R.drawable.images)
                 .into(binding.featuredHomeArticleImageView)
         }
         binding.titleHomeTextView.text = news[0].title
         newsAdapter.changeData(news.subList(1, news.size))
 
+        binding.readMoreHomeButton.setOnClickListener {
+            viewModel.NavigateToDetails(
+                news[0],
+                it
+            )
+        }
 
     }
 

@@ -86,7 +86,7 @@
                 tools:text="12-3-2020" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/addFavouriteDetailsImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"

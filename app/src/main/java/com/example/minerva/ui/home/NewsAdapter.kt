@@ -8,7 +8,11 @@ import com.example.minerva.R
 import com.example.minerva.data.model.Article
 import com.example.minerva.databinding.ItemNewsHomeBinding
 
-class NewsAdapter(var newsList: MutableList<Article>, private val onSelect: (Article?) -> Unit) :
+class NewsAdapter(
+    var newsList: MutableList<Article>,
+    private val onSelect: (Article?) -> Unit,
+    private val onNewsClicked: (Article) -> Unit
+) :
     RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
 
@@ -28,7 +32,6 @@ class NewsAdapter(var newsList: MutableList<Article>, private val onSelect: (Art
     }
 
 
-
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         val item = newsList[position]
 
@@ -45,10 +48,12 @@ class NewsAdapter(var newsList: MutableList<Article>, private val onSelect: (Art
             onSelect(item)
             holder.view.addFavouriteHomeImageView.setImageResource(R.drawable.ic_added_favorite_24)
         }
-
+        holder.view.root.setOnClickListener {
+            onNewsClicked(item)
+        }
         Glide.with(holder.view.HomeImageView.context)
             .load(item.urlToImage)
-            .placeholder(R.drawable.testimage)
+            .placeholder(R.drawable.images)
             .into(holder.view.HomeImageView)
 
     }

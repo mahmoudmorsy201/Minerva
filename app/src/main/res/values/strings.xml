@@ -25,4 +25,6 @@
     <string name="read_more">Read more</string>
     <string name="favourites">Favourites</string>
     <string name="search">Search here …</string>
+    <string name="details">Details</string>
+    <string name="url_not_available">Not available now</string>
 </resources>
