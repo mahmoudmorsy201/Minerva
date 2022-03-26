@@ -1,5 +1,6 @@
 package com.example.minerva.ui.home
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,7 +9,7 @@ import com.example.minerva.R
 import com.example.minerva.data.model.Article
 import com.example.minerva.databinding.ItemNewsHomeBinding
 
-class NewsAdapter(var newsList: MutableList<Article>, private val onSelect: (Article?) -> Unit) :
+class NewsAdapter(private var newsList: MutableList<Article>, private val onSelect: (Article?) -> Unit) :
     RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
 
@@ -21,6 +22,7 @@ class NewsAdapter(var newsList: MutableList<Article>, private val onSelect: (Art
         return NewsViewHolder(binding)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun changeData(newList: List<Article>) {
         newsList.clear()
         newsList.addAll(newList)
@@ -48,7 +50,7 @@ class NewsAdapter(var newsList: MutableList<Article>, private val onSelect: (Art
 
         Glide.with(holder.view.HomeImageView.context)
             .load(item.urlToImage)
-            .placeholder(R.drawable.testimage)
+            .placeholder(R.drawable.images)
             .into(holder.view.HomeImageView)
 
     }

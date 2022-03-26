@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/navigation_settings"
-        android:name="com.example.minerva.ui.setting.FragmentSetting"
+        android:name="com.example.minerva.ui.setting.SettingFragment"
         android:label="@string/settings"
         tools:layout="@layout/fragment_setting" />
 

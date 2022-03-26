@@ -113,7 +113,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                             mainList.addAll(data.articles.subList(0, data.articles.size))
                             viewModel.getLocalArticles().asLiveData().observe(viewLifecycleOwner) {
                                 displayResult(it)
-
                             }
                         }
                 }
@@ -125,7 +124,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 }
             }
         }
-
         return root
     }
 
@@ -133,13 +131,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         lifecycle.coroutineScope.launch {
             Glide.with(binding.featuredHomeArticleImageView)
                 .load(news[0].urlToImage)
-                .placeholder(R.drawable.testimage)
+                .placeholder(R.drawable.images)
                 .into(binding.featuredHomeArticleImageView)
         }
         binding.titleHomeTextView.text = news[0].title
         newsAdapter.changeData(news.subList(1, news.size))
-
-
     }
 
 

@@ -32,6 +32,10 @@ class Repository @Inject constructor(
         userDao.updateUserData(newUser)
     }
 
+    override suspend fun updateUser(updateUserPassword: String, email: String) {
+        userDao.updateUserPassword(updateUserPassword, email)
+    }
+
     override suspend fun deleteUser(user: User) {
         userDao.deleteUser(user)
     }
@@ -52,13 +56,11 @@ class Repository @Inject constructor(
         articleDao.insertListOfArticles(articles)
     }
 
-    override  fun getStoredFavouriteArticlesByUserEmail(userEmail: String): Flow<List<Article>> =
+    override fun getStoredFavouriteArticlesByUserEmail(userEmail: String): Flow<List<Article>> =
         articleDao.getAllFavouriteArticlesByUserEmail(userEmail)
 
     override fun getStoredFavouriteArticles(searchQuery: String): Flow<List<Article>> =
         articleDao.getAllFavouriteArticles(searchQuery)
-
-
 
 
     override fun getLocalArticle(): Flow<List<Article>> =

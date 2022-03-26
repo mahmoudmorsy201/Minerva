@@ -16,4 +16,7 @@
     <color name="login_register_text_color">#0940CA</color>
     <color name="main_bg">#40E6E6E6</color>
 
+    <color name="change_password_background_color">#615A5A</color>
+    <color name="logout_background_color">#D50000</color>
+
 </resources>
