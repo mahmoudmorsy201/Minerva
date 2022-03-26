@@ -13,6 +13,7 @@ interface RepositoryInterface {
     suspend fun getUserByEmail(email: String, password: String): User?
     suspend fun updateUser(newUser: User)
     suspend fun deleteUser(user: User)
+    suspend fun updateUser(updateUserPassword: String, email: String)
 
     //For News Api Response
     suspend fun getNewsResponseFromApi(country: String): Response<NewsDto>
@@ -21,7 +22,7 @@ interface RepositoryInterface {
     suspend fun insertFavouriteArticle(favouriteArticle: Article)
     suspend fun insertListOfArticles(articles: List<Article>)
     fun getStoredFavouriteArticlesByUserEmail(userEmail: String): Flow<List<Article>>
-    fun getStoredFavouriteArticles(searchQuery: String) : Flow<List<Article>>
+    fun getStoredFavouriteArticles(searchQuery: String): Flow<List<Article>>
 
     //for room articles
     fun getLocalArticle(searchQuery: String): Flow<List<Article>>

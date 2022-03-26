@@ -30,4 +30,10 @@ class MyPreference @Inject constructor(@ApplicationContext context: Context) : S
     override fun setUserPassword(query: String) {
         prefs.edit().putString(userPasswordInSharedPreferences, query).apply()
     }
+
+    fun clearAllCache() {
+        prefs.edit().clear().apply()
+    }
+
+
 }

@@ -70,6 +70,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                         .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
                         .distinctUntilChanged()
                         .collect { data ->
+
                             viewModel.searchedArticles.observe(viewLifecycleOwner) {
                                 if (it.isEmpty()) {
                                     displayResult(data.articles)
@@ -87,7 +88,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 }
             }
         }
-
         return root
     }
 
@@ -101,13 +101,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         lifecycle.coroutineScope.launch {
             Glide.with(binding.featuredHomeArticleImageView)
                 .load(news[0].urlToImage)
-                .placeholder(R.drawable.testimage)
+                .placeholder(R.drawable.images)
                 .into(binding.featuredHomeArticleImageView)
         }
         binding.titleHomeTextView.text = news[0].title
         newsAdapter.changeData(news.subList(1, news.size))
-
-
     }
 
 
