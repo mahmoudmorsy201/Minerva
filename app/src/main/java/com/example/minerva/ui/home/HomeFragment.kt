@@ -15,6 +15,7 @@ import com.example.minerva.data.model.NewsDto
 import com.example.minerva.databinding.FragmentHomeBinding
 
 import com.example.minerva.util.InternetConnectivity
+import com.example.minerva.util.onQueryTextChange
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
@@ -60,6 +61,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
 
         initRecycler()
+        setSearchView()
 
         connectionLiveData.observe(viewLifecycleOwner) { isAvailable ->
             when (isAvailable) {
@@ -68,20 +70,18 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                         .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
                         .distinctUntilChanged()
                         .collect { data ->
-                            viewModel.getLocalArticles().asLiveData().observe(viewLifecycleOwner) {
+                            viewModel.searchedArticles.observe(viewLifecycleOwner) {
                                 if (it.isEmpty()) {
                                     displayResult(data.articles)
                                 } else {
                                     displayResult(it)
                                 }
-
-
                             }
                         }
                 }
 
                 false -> {
-                    viewModel.getLocalArticles().asLiveData().observe(viewLifecycleOwner) {
+                    viewModel.searchedArticles.observe(viewLifecycleOwner) {
                         newsAdapter.changeData(it)
                     }
                 }
@@ -89,6 +89,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
 
         return root
+    }
+
+    private fun setSearchView() {
+        binding.searchHomeSearchView.onQueryTextChange {
+            viewModel.searchQuery.value = it
+        }
     }
 
     private fun displayResult(news: List<Article>) {

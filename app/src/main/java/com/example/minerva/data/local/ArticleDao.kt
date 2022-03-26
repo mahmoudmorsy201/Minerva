@@ -21,7 +21,7 @@ interface ArticleDao {
     @Query("SELECT * FROM articles WHERE email = :userEmail")
     fun getAllFavouriteArticlesByUserEmail(userEmail: String): Flow<List<Article>>
 
-    @Query("SELECT * FROM articles")
-    fun getArticlesFromRoom(): Flow<List<Article>>
+    @Query("SELECT * FROM articles WHERE title LIKE '%' || :searchQuery || '%'")
+    fun getArticlesFromRoom(searchQuery: String): Flow<List<Article>>
 
 }
