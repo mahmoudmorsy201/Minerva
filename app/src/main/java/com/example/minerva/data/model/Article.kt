@@ -3,6 +3,7 @@ package com.example.minerva.data.model
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity(
     tableName = "Articles",
@@ -26,4 +27,4 @@ data class Article(
     val title: String? = null,
     val urlToImage: String? = null,
     var isFavourite: Boolean = false
-)
+) : Serializable

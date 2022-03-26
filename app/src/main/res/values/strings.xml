@@ -26,10 +26,15 @@
     <string name="read_more">Read more</string>
     <string name="favourites">Favourites</string>
     <string name="search">Search here …</string>
+
+    <string name="details">Details</string>
+    <string name="url_not_available">Not available now</string>
+
     <string name="logout">Logout</string>
     <string name="copyRights">© 2022 MEW All Rights Reserved</string>
     <string name="cancel">Cancel</string>
     <string name="confirmPassword">Confrim password</string>
     <string name="do_you_want_to_log_out">Do you want to logout ?</string>
     <string name="password_changed">"Password changed successfully "</string>
+
 </resources>
