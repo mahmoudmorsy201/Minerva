@@ -1,5 +1,6 @@
 package com.example.minerva.ui.home
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,11 +9,13 @@ import com.example.minerva.R
 import com.example.minerva.data.model.Article
 import com.example.minerva.databinding.ItemNewsHomeBinding
 
+
 class NewsAdapter(
     var newsList: MutableList<Article>,
     private val onSelect: (Article?) -> Unit,
     private val onNewsClicked: (Article) -> Unit
 ) :
+
     RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
 
@@ -25,6 +28,7 @@ class NewsAdapter(
         return NewsViewHolder(binding)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun changeData(newList: List<Article>) {
         newsList.clear()
         newsList.addAll(newList)
