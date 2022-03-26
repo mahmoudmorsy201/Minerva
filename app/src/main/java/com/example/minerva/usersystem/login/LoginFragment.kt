@@ -1,5 +1,6 @@
 package com.example.minerva.usersystem.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.minerva.MainActivity
 import com.example.minerva.R
 import com.example.minerva.databinding.FragmentLoginBinding
 import com.example.minerva.util.AESEncyption
@@ -34,6 +36,10 @@ class LoginFragment : Fragment() {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        if (viewModel.checkIfUserExits()) {
+            navigateToMainScreen()
+        }
+
         binding.signInButton.setOnClickListener() {
             if (isValidData()) {
                 lifecycle.coroutineScope.launch {
@@ -48,7 +54,6 @@ class LoginFragment : Fragment() {
         viewModel.user.observe(viewLifecycleOwner) {
             if (it == null) {
                 Toast.makeText(context, "UserNotFound", Toast.LENGTH_SHORT).show()
-                //todo show no userFound in the database
             } else {
                 Toast.makeText(context, "userFound ${it.email}", Toast.LENGTH_SHORT).show()
                 if (binding.rememberMeCheckbox.isChecked) {
@@ -56,8 +61,8 @@ class LoginFragment : Fragment() {
                         binding.emailTextInputEditText.text.toString(),
                         AESEncyption.encrypt(binding.passwordTextInputEditText.text.toString())!!
                     )
+                    navigateToMainScreen()
                 }
-                //todo navigate to main activity
             }
         }
 
@@ -66,6 +71,11 @@ class LoginFragment : Fragment() {
         }
 
         return root
+    }
+
+    fun navigateToMainScreen() {
+        requireActivity().startActivity(Intent(activity, MainActivity::class.java))
+        requireActivity().finish()
     }
 
     override fun onDestroyView() {

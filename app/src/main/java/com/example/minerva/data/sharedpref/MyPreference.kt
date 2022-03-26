@@ -1,4 +1,4 @@
-package com.example.minerva.data.local
+package com.example.minerva.data.sharedpref
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -7,7 +7,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class MyPreference @Inject constructor(@ApplicationContext context: Context) {
+class MyPreference @Inject constructor(@ApplicationContext context: Context) : SharedPrefInterface {
 
     private val sharedPreferencesFileName = "SETTINGS"
     private val userEmailInSharedPreferences = "USER_EMAIL_IN_SHARED_PREFERENCES"
@@ -15,19 +15,19 @@ class MyPreference @Inject constructor(@ApplicationContext context: Context) {
 
     val prefs = context.getSharedPreferences(sharedPreferencesFileName, Context.MODE_PRIVATE)
 
-    fun getUserEmail(): String {
+    override fun getUserEmail(): String {
         return prefs.getString(userEmailInSharedPreferences, "")!!
     }
 
-    fun setUserEmail(query: String) {
+    override fun setUserEmail(query: String) {
         prefs.edit().putString(userEmailInSharedPreferences, query).apply()
     }
 
-    fun getUserPassword(): String {
+    override fun getUserPassword(): String {
         return prefs.getString(userPasswordInSharedPreferences, "")!!
     }
 
-    fun setUserPassword(query: String) {
+    override fun setUserPassword(query: String) {
         prefs.edit().putString(userPasswordInSharedPreferences, query).apply()
     }
 }

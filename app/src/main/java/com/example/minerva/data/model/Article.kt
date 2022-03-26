@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
     foreignKeys = [ForeignKey(
         entity = User::class,
         parentColumns = arrayOf("email"),
-        childColumns = arrayOf("url"),
+        childColumns = arrayOf("email"),
         onDelete = ForeignKey.CASCADE
     )]
 )
@@ -17,7 +17,7 @@ import androidx.room.PrimaryKey
 data class Article(
     @PrimaryKey
     val url: String,
-    val email: String = "Eslam@mail.com",
+    var email: String,
     val author: String? = null,
     val content: String? = null,
     val description: String? = null,
