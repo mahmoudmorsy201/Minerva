@@ -99,16 +99,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
         }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.result
-                .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
-                .distinctUntilChanged()
-                .collect { data ->
-                    mainList.clear()
-                    mainList.addAll(data.articles.subList(0, data.articles.size))
-                    displayResult(data)
-                }
-        }
+
         initRecycler()
 
         connectionLiveData.observe(viewLifecycleOwner) { isAvailable ->
