@@ -21,8 +21,10 @@ class HomeViewModel @Inject constructor(private val repo: RepositoryInterface) :
         emit(data.body()!!)
     }
 
-    //val resultFromRoom: Flow<List<Article>> = repo.getLocalArticle()
-
     fun getLocalArticles() = repo.getLocalArticle()
+
+    suspend fun insertIntoFavourite(article: Article) {
+        repo.insertFavouriteArticle(article)
+    }
 
 }

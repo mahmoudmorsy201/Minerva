@@ -25,5 +25,5 @@ data class Article(
     val source: Source? = null,
     val title: String? = null,
     val urlToImage: String? = null,
-    val isFavourite: Boolean = false
+    var isFavourite: Boolean = false
 )

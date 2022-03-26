@@ -35,7 +35,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val root: View = binding.root
         connectionLiveData = InternetConnectivity(requireContext())
 
-        newsAdapter = NewsAdapter(arrayListOf())
+        newsAdapter = NewsAdapter(arrayListOf()) {
+            if (it != null) {
+                viewLifecycleOwner.lifecycleScope.launch {
+                    it.isFavourite = true
+                    viewModel.insertIntoFavourite(it)
+                }
+            }
+        }
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.result
                 .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
@@ -84,6 +91,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             adapter = newsAdapter
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

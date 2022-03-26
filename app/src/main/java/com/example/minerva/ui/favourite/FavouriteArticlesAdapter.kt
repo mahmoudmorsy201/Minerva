@@ -1,4 +1,4 @@
-package com.example.minerva.ui.home
+package com.example.minerva.ui.favourite
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,17 +8,20 @@ import com.example.minerva.R
 import com.example.minerva.data.model.Article
 import com.example.minerva.databinding.ItemNewsHomeBinding
 
-class NewsAdapter(var newsList: MutableList<Article>, private val onSelect: (Article?) -> Unit) :
-    RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
+
+class FavouriteArticlesAdapter(
+    var newsList: MutableList<Article>,
+    private val onSelect: (Article?) -> Unit
+) : RecyclerView.Adapter<FavouriteArticlesAdapter.FavouriteViewHolder>() {
 
 
-    class NewsViewHolder(var view: ItemNewsHomeBinding) : RecyclerView.ViewHolder(view.root)
+    class FavouriteViewHolder(var view: ItemNewsHomeBinding) : RecyclerView.ViewHolder(view.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavouriteViewHolder {
         val binding =
             ItemNewsHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
-        return NewsViewHolder(binding)
+        return FavouriteViewHolder(binding)
     }
 
     fun changeData(newList: List<Article>) {
@@ -27,7 +30,7 @@ class NewsAdapter(var newsList: MutableList<Article>, private val onSelect: (Art
         notifyDataSetChanged()
     }
 
-    override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FavouriteViewHolder, position: Int) {
         val item = newsList[position]
 
         holder.view.titleHomeTextView.text = item.title
@@ -35,7 +38,6 @@ class NewsAdapter(var newsList: MutableList<Article>, private val onSelect: (Art
         holder.view.authorHomeTextview.text = item.author
         holder.view.addFavouriteHomeImageView.setOnClickListener {
             onSelect(item)
-            holder.view.addFavouriteHomeImageView.setImageResource(R.drawable.ic_added_favorite_24)
         }
         if (item.isFavourite)
             holder.view.addFavouriteHomeImageView.setImageResource(R.drawable.ic_added_favorite_24)
@@ -46,5 +48,6 @@ class NewsAdapter(var newsList: MutableList<Article>, private val onSelect: (Art
     }
 
     override fun getItemCount(): Int = newsList.size
+
 
 }

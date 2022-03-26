@@ -21,7 +21,7 @@ interface RepositoryInterface {
     suspend fun insertFavouriteArticle(favouriteArticle: Article)
     suspend fun insertListOfArticles(articles: List<Article>)
     fun getStoredFavouriteArticlesByUserEmail(userEmail: String): Flow<List<Article>>
-    suspend fun deleteFavouriteArticle(favouriteArticle: Article)
+    fun getStoredFavouriteArticles(searchQuery: String) : Flow<List<Article>>
 
     //for room articles
     fun getLocalArticle(): Flow<List<Article>>
